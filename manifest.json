@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Facebook Share Tool",
+  "name": "Facebook Share Extension",
   "version": "1.0",
   "description": "A tool to share Facebook posts using cookies and tokens.",
   "permissions": [
