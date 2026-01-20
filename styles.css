@@ -1,4 +1,4 @@
-/* Body */
+/* BODY */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -8,21 +8,20 @@ body {
 body.light { background: #f2e5ff; color: #4b0082; }
 body.dark { background: #1a001a; color: #c0a3ff; }
 
-/* Navbar */
+/* NAVBAR */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #4b0082;
   padding: 10px;
-  color: #fff;
+  color: white;
 }
 
 .burger { cursor: pointer; font-size: 20px; }
-
 .title { font-weight: bold; }
 
-/* Switch */
+/* SWITCH */
 .switch {
   position: relative;
   display: inline-block;
@@ -56,13 +55,16 @@ input:checked + .slider:before {
   transform: translateX(20px);
 }
 
-/* Content */
+/* CONTENT */
 .content {
   padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 input {
-  width: 100%;
+  width: 90%;
   padding: 10px;
   margin-bottom: 10px;
   border: 2px solid #4b0082;
@@ -76,27 +78,26 @@ input:focus {
   border-color: #c0a3ff;
 }
 
-/* Buttons */
-button {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 10px;
+/* SHARE BUTTON - SQUARE & ICON */
+button#shareBtn {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
   background: #4b0082;
   color: #f2e5ff;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  font-size: 24px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 8px;
+  align-items: center;
+  cursor: pointer;
 }
 
-button:hover {
+button#shareBtn:hover {
   background: #6a0dad;
 }
 
-/* Sidebar */
+/* SIDEBAR */
 #sidebar {
   position: fixed;
   top: 0;
@@ -107,19 +108,35 @@ button:hover {
   color: #f2e5ff;
   padding: 20px;
   transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 #sidebar.active { left: 0; }
 
 #sidebar button {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
   background: #6a0dad;
   color: #f2e5ff;
+  border: none;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #sidebar button:hover {
   background: #8b00ff;
 }
 
-/* Status */
-#status { margin-top: 10px; font-weight: bold; color: #4b0082; }
+/* STATUS TEXT */
+#status {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #4b0082;
+}
+
 body.dark #status { color: #c0a3ff; }
