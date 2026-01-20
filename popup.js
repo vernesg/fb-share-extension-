@@ -54,16 +54,22 @@ document.addEventListener("DOMContentLoaded", () => {
     sidebar.classList.remove("active");
     alert("Home - Welcome to Facebook Share Tool!");
   });
+
   document.getElementById("shareTool").addEventListener("click", () => {
     sidebar.classList.remove("active");
+    document.querySelector(".main-content").scrollIntoView({ behavior: "smooth" });
   });
+
   document.getElementById("settings").addEventListener("click", () => {
     sidebar.classList.remove("active");
     alert("Settings - Placeholder for settings page.");
   });
+
   document.getElementById("developer").addEventListener("click", () => {
+    sidebar.classList.remove("active");
     window.open("https://www.facebook.com/notfound500", "_blank");
   });
+
   document.getElementById("exitBtn").addEventListener("click", () => {
     window.close();
   });
@@ -102,6 +108,43 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   downloadFromModal.addEventListener("click", () => {
-    downloadFile("https://github.com/vernesg/cookie-getter-extension/archive/refs/heads/main.zip", "cookie-getter-extension.zip");
-    modal.style.display = "none";
+    downloadFile(
+      "https://github.com/vernesg/cookie-getter-extension/archive/refs/heads/main.zip",
+      "cookie-getter-extension.zip"
+    );
   });
+
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  shareForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    resultDiv.textContent = "Extracting token, please wait...";
+
+    const cookie = document.getElementById("cookieInput").value.trim();
+    if (!cookie) {
+      resultDiv.textContent = "Please enter a valid cookie.";
+      return;
+    }
+
+    let token = null;
+
+    for (const ua of ua_list) {
+      token = await extract_token(cookie, ua);
+      if (token) break;
+    }
+
+    if (token) {
+      resultDiv.innerHTML = `
+        <strong>Access Token Found:</strong><br>
+        <textarea readonly style="width:100%;height:80px;">${token}</textarea>
+      `;
+    } else {
+      resultDiv.textContent = "Failed to extract access token.";
+    }
+  });
+
+});
