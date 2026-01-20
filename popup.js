@@ -28,6 +28,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  async function sharePost(token, post_link, ua, cookie) {
+    try {
+      const params = new URLSearchParams({
+        link: post_link,
+        access_token: token,
+        published: 0
+      });
+      const response = await fetch(`https://graph.facebook.com/v18.0/me/feed?${params}`, {
+        method: 'POST',
+        headers: {
+          "user-agent": ua,
+          "Cookie": cookie
+        }
+      });
+      const data = await response.json();
+      return data.id ? true : false;
+    } catch (err) {
+      console.error('Share error:', err);
+      return false;
+    }
+  }
+
   document.querySelector(".burger").addEventListener("click", () => {
     sidebar.classList.toggle("active");
   });
@@ -75,76 +97,57 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function downloadFile(url, filename) {
-    fetch(url)
-      .then(response => response.blob())
-      .then(blob => {
-        const blobUrl = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = blobUrl;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(blobUrl);
-      })
-      .catch(err => console.error('Download failed:', err));
+  fetch(url)
+    .then(response => response.blob())
+    .then(blob => {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(a.href);
+    })
+    .catch(err => console.error("Download error:", err));
+}
+
+// Handle share form submit
+shareForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  resultDiv.innerHTML = "⏳ Processing...";
+  resultDiv.style.color = "#aaa";
+
+  const cookie = document.getElementById("cookie").value.trim();
+  const post_link = document.getElementById("postLink").value.trim();
+  const limit = parseInt(document.getElementById("limit").value);
+
+  if (!cookie || !post_link || !limit) {
+    resultDiv.innerHTML = "❌ Missing required fields";
+    resultDiv.style.color = "red";
+    return;
   }
 
-  document.getElementById("downloadCookieGetter").addEventListener("click", () => {
-    downloadFile("https://github.com/vernesg/cookie-getter-extension/archive/refs/heads/main.zip", "cookie-getter-extension.zip");
-  });
+  let success = 0;
+  let failed = 0;
 
-  const modal = document.getElementById("tutorialModal");
-  const closeModal = document.getElementById("closeModal");
-  const downloadFromModal = document.getElementById("downloadFromModal");
+  for (let i = 0; i < limit; i++) {
+    const ua = ua_list[Math.floor(Math.random() * ua_list.length)];
+    const token = await extract_token(cookie, ua);
 
-  document.getElementById("tutorial").addEventListener("click", () => {
-    sidebar.classList.remove("active");
-    modal.style.display = "block";
-  });
-
-  closeModal.addEventListener("click", () => {
-    modal.style.display = "none";
-  });
-
-  downloadFromModal.addEventListener("click", () => {
-    downloadFile(
-      "https://github.com/vernesg/cookie-getter-extension/archive/refs/heads/main.zip",
-      "cookie-getter-extension.zip"
-    );
-  });
-
-  window.addEventListener("click", (event) => {
-    if (event.target === modal) {
-      modal.style.display = "none";
-    }
-  });
-
-  shareForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    resultDiv.textContent = "Extracting token, please wait...";
-
-    const cookie = document.getElementById("cookieInput").value.trim();
-    if (!cookie) {
-      resultDiv.textContent = "Please enter a valid cookie.";
-      return;
+    if (!token) {
+      failed++;
+      continue;
     }
 
-    let token = null;
+    const ok = await sharePost(token, post_link, ua, cookie);
+    ok ? success++ : failed++;
 
-    for (const ua of ua_list) {
-      token = await extract_token(cookie, ua);
-      if (token) break;
-    }
+    resultDiv.innerHTML = `
+      ✅ Success: ${success}<br>
+      ❌ Failed: ${failed}
+    `;
+  }
 
-    if (token) {
-      resultDiv.innerHTML = `
-        <strong>Access Token Found:</strong><br>
-        <textarea readonly style="width:100%;height:80px;">${token}</textarea>
-      `;
-    } else {
-      resultDiv.textContent = "Failed to extract access token.";
-    }
-  });
-
+  resultDiv.style.color = success ? "lime" : "red";
 });
