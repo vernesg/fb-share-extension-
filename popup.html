@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Facebook Share Tool</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="purple-mode">
+  <nav class="navbar">
+    <div class="navbar-left">
+      <button class="burger"><i class="fas fa-bars"></i></button>
+      <span class="title">Facebook Share Tool</span>
+    </div>
+    <div class="navbar-right">
+      <label class="switch">
+        <input type="checkbox" id="darkModeSwitch">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </nav>
+
+  <div id="sidebar" class="sidebar">
+    <button id="backBtn" class="back-btn"><i class="fas fa-arrow-left"></i> Back</button>
+    <ul class="sidebar-menu">
+      <li><a href="#" id="home"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="#" id="shareTool"><i class="fas fa-share"></i> Share Tool</a></li>
+      <li><a href="#" id="tutorial"><i class="fas fa-book"></i> Tutorial</a></li>
+      <li><a href="#" id="settings"><i class="fas fa-cog"></i> Settings</a></li>
+      <li><a href="#" id="developer"><i class="fas fa-user"></i> Developer</a></li>
+      <li><a href="#" id="exitBtn"><i class="fas fa-sign-out-alt"></i> Exit</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <div class="cover-image" style="background-image: url('https://i.imgur.com/7mM3aGD.jpeg');"></div>
+    
+    <h1><i class="fas fa-share-alt"></i> Share Facebook Posts</h1>
+    <form id="shareForm">
+      <div class="form-group">
+        <label for="cookie"><i class="fas fa-cookie-bite"></i> Facebook Cookie (full string):</label>
+        <textarea id="cookie" placeholder="Paste your Facebook cookie here..." required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="link"><i class="fas fa-link"></i> Post Link:</label>
+        <input type="url" id="link" placeholder="https://www.facebook.com/..." required>
+      </div>
+      <div class="form-group">
+        <label for="limit"><i class="fas fa-hashtag"></i> Share Limit:</label>
+        <input type="number" id="limit" min="1" max="100" value="10" required>
+      </div>
+      <button type="submit" class="btn-purple"><i class="fas fa-paper-plane"></i> Share Now</button>
+    </form>
+    <div id="result" class="result"></div>
+    
+    <button id="downloadCookieGetter" class="btn-purple" style="margin-top: 20px;"><i class="fas fa-download"></i> Download Cookie Getter Extension</button>
+  </div>
+
+  <div id="tutorialModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <h2><i class="fas fa-book"></i> Cookie Getter Tutorial</h2>
+      <p>This guide helps you use the Cookie Getter extension to extract Facebook cookies for tools like this Share Tool.</p>
+      <ol>
+        <li>Download and install the Cookie Getter extension from the button below or manually from GitHub.</li>
+        <li>Open Facebook in your browser and log in.</li>
+        <li>Click the Cookie Getter extension icon to view and copy your cookies (e.g., c_user, xs).</li>
+        <li>Paste the full cookie string into the "Facebook Cookie" field above.</li>
+        <li>Use the Share Tool to share posts securely.</li>
+      </ol>
+      <p><strong>Note:</strong> Ensure you're logged into Facebook. For full details, check the GitHub repo.</p>
+      <button id="downloadFromModal" class="btn-purple"><i class="fas fa-download"></i> Download Now</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
