@@ -1,17 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "Facebook Share Extension",
-  "version": "1.0",
-  "description": "A tool to share Facebook posts using cookies and tokens.",
+  "name": "FB Share Extension",
+  "version": "1.1",
+  "description": "Facebook Share Extension with Monochrome Purple Design and Sidebar",
   "permissions": [
     "cookies",
-    "storage",
-    "https://business.facebook.com/*",
-    "https://graph.facebook.com/*"
+    "storage"
   ],
   "host_permissions": [
-    "https://business.facebook.com/*",
-    "https://graph.facebook.com/*"
+    "https://*.facebook.com/*",
+    "https://vern-rest-api.vercel.app/*"
   ],
   "action": {
     "default_popup": "popup.html",
