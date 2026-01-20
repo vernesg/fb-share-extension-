@@ -5,7 +5,8 @@
   "description": "Facebook Share Tool Extension with Monochrome Purple Design",
   "permissions": [
     "cookies",
-    "storage"
+    "storage",
+    "activeTab"
   ],
   "host_permissions": [
     "https://*.facebook.com/*",
