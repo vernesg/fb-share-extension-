@@ -7,30 +7,140 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-body { font-family:'Poppins', sans-serif; margin:0; padding:0; min-height:100vh; background:linear-gradient(135deg,#4c1d95,#7c3aed); color:#fff; transition:0.3s; display:flex; flex-direction:column;}
+body {
+  font-family:'Poppins', sans-serif;
+  margin:0; padding:0;
+  min-height:100vh;
+  background:linear-gradient(135deg,#4c1d95,#7c3aed);
+  color:#fff;
+  transition:0.3s;
+  display:flex;
+  flex-direction:column;
+}
 body.dark { background:#1a001a; color:#c0a3ff; }
 
-.navbar { background:#2d1b69; padding:12px 20px; display:flex; justify-content:space-between; align-items:center; position:relative; z-index:1000; }
+/* Navbar */
+.navbar {
+  background:#2d1b69;
+  padding:12px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:relative;
+  z-index:1000;
+}
 .navbar .logo { font-size:1.3rem; font-weight:600; color:#e9d5ff; }
 .burger { font-size:1.5rem; cursor:pointer; color:#c4b5fd; }
-.nav-links { position:fixed; top:0; right:-50%; width:50%; height:100%; background:#4b0082; flex-direction:column; gap:15px; padding:20px; display:flex; transition:0.3s; z-index:999; }
-.nav-links.active { right:0; }
-.nav-links a, .nav-links button { color:#f2e5ff; text-decoration:none; padding:12px; border-radius:8px; display:flex; align-items:center; gap:8px; background:#6a0dad; border:none; cursor:pointer; font-size:1rem; }
-.nav-links a:hover, .nav-links button:hover { background:#8b00ff; }
+
+/* Slide Menu */
+.nav-links {
+  position:fixed;
+  top:0;
+  right:0;
+  width:50%;
+  height:100%;
+  background:#4b0082;
+  flex-direction:column;
+  gap:15px;
+  padding:20px;
+  display:flex;
+  transform: translateX(100%); /* fully hidden initially */
+  transition: transform 0.3s ease-in-out;
+  z-index:999;
+  box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+}
+.nav-links.active {
+  transform: translateX(0); /* slide in */
+}
+
+/* Slide Menu Buttons */
+.nav-links a,
+.nav-links button {
+  color:#f2e5ff;
+  text-decoration:none;
+  padding:12px;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:#6a0dad;
+  border:none;
+  cursor:pointer;
+  font-size:1rem;
+}
+.nav-links a:hover,
+.nav-links button:hover { background:#8b00ff; }
+
+/* Switch */
 .switch { display:flex; align-items:center; gap:5px; margin-top:10px; }
 .switch input { display:none; }
-.slider { position:relative; width:40px; height:20px; background:#c0a3ff; border-radius:20px; cursor:pointer; }
-.slider:before { content:""; position:absolute; width:16px; height:16px; background:#4b0082; border-radius:50%; left:2px; bottom:2px; transition:0.3s; }
+.slider {
+  position:relative;
+  width:40px;
+  height:20px;
+  background:#c0a3ff;
+  border-radius:20px;
+  cursor:pointer;
+}
+.slider:before {
+  content:"";
+  position:absolute;
+  width:16px;
+  height:16px;
+  background:#4b0082;
+  border-radius:50%;
+  left:2px;
+  bottom:2px;
+  transition:0.3s;
+}
 input:checked + .slider:before { transform:translateX(20px); }
 
-.container { margin-top:80px; background:#1e1b4b; border-radius:15px; padding:30px; box-shadow:0 10px 30px rgba(124,58,237,0.3); max-width:400px; width:90%; margin-left:auto; margin-right:auto; }
+/* Container */
+.container {
+  margin-top:80px;
+  background:#1e1b4b;
+  border-radius:15px;
+  padding:30px;
+  box-shadow:0 10px 30px rgba(124,58,237,0.3);
+  max-width:400px;
+  width:90%;
+  margin-left:auto;
+  margin-right:auto;
+  position:relative;
+  z-index:1; /* stays above background but below nav-links if slide is active */
+}
 h1 { text-align:center; margin-bottom:20px; font-weight:600; color:#e9d5ff; }
 .form-group { margin-bottom:15px; }
 label { display:block; margin-bottom:5px; font-weight:400; color:#c4b5fd; }
-input { width:100%; padding:10px; border-radius:8px; border:1px solid #5b21b6; background:#312e81; color:#fff; font-size:1rem; }
+input {
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #5b21b6;
+  background:#312e81;
+  color:#fff;
+  font-size:1rem;
+}
 input:focus { outline:none; border-color:#a855f7; box-shadow:0 0 10px rgba(168,85,247,0.5); }
-button#shareBtn { width:100%; padding:12px; border:none; border-radius:8px; background:#7c3aed; color:#fff; font-weight:600; cursor:pointer; font-size:1.1rem; display:flex; align-items:center; justify-content:center; gap:8px; }
+
+/* Share Button */
+button#shareBtn {
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  background:#7c3aed;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  font-size:1.1rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
 button#shareBtn:hover { background:#a855f7; }
+
 #status { margin-top:10px; text-align:center; font-weight:500; }
 .icon { margin-right:6px; }
 </style>
@@ -52,7 +162,7 @@ button#shareBtn:hover { background:#a855f7; }
 </nav>
 
 <div class="container">
-  <h1><i class="fas fa-share-alt icon"></i>FB Share</h1>
+  <h1><i class="fas fa-share-alt icon"></i>Share Extension</h1>
   <div class="form-group">
     <label for="cookie"><i class="fas fa-cookie-bite icon"></i>Cookie:</label>
     <input type="text" id="cookie" placeholder="c_user=...; xs=...;">
@@ -63,11 +173,21 @@ button#shareBtn:hover { background:#a855f7; }
   </div>
   <div class="form-group">
     <label for="limit"><i class="fas fa-hashtag icon"></i>Limit:</label>
-    <input type="number" id="limit" placeholder="10">
+    <input type="number" id="limit" placeholder="amount">
   </div>
   <button id="shareBtn"><i class="fas fa-paper-plane icon"></i>Share Now</button>
   <p id="status"></p>
 </div>
+
+<script>
+// Slide menu toggle
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('nav-links');
+
+burger.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+</script>
 
 <script src="popup.js"></script>
 </body>
