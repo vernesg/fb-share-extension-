@@ -5,8 +5,15 @@ body {
   transition: 0.3s;
 }
 
-body.light { background: #f2e5ff; color: #4b0082; }
-body.dark { background: #1a001a; color: #c0a3ff; }
+body.light {
+  background: #f2e5ff;
+  color: #4b0082;
+}
+
+body.dark {
+  background: #1a001a;
+  color: #c0a3ff;
+}
 
 /* NAVBAR */
 .navbar {
@@ -18,10 +25,17 @@ body.dark { background: #1a001a; color: #c0a3ff; }
   color: white;
 }
 
-.burger { cursor: pointer; font-size: 20px; }
-.title { font-weight: bold; }
+.burger {
+  cursor: pointer;
+  font-size: 20px;
+}
 
-/* SWITCH */
+.title {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* SWITCH (Dark/Light toggle inside navbar) */
 .switch {
   position: relative;
   display: inline-block;
@@ -29,7 +43,9 @@ body.dark { background: #1a001a; color: #c0a3ff; }
   height: 20px;
 }
 
-.switch input { display: none; }
+.switch input {
+  display: none;
+}
 
 .slider {
   position: absolute;
@@ -55,7 +71,7 @@ input:checked + .slider:before {
   transform: translateX(20px);
 }
 
-/* CONTENT */
+/* MAIN CONTENT */
 .content {
   padding: 15px;
   display: flex;
@@ -63,7 +79,8 @@ input:checked + .slider:before {
   align-items: center;
 }
 
-input {
+/* INPUT FIELDS */
+.content input {
   width: 90%;
   padding: 10px;
   margin-bottom: 10px;
@@ -71,9 +88,10 @@ input {
   border-radius: 5px;
   background: #f2e5ff;
   color: #4b0082;
+  font-size: 14px;
 }
 
-input:focus {
+.content input:focus {
   outline: none;
   border-color: #c0a3ff;
 }
@@ -91,6 +109,7 @@ button#shareBtn {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 button#shareBtn:hover {
@@ -110,11 +129,15 @@ button#shareBtn:hover {
   transition: 0.3s;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
+  z-index: 1000;
 }
 
-#sidebar.active { left: 0; }
+#sidebar.active {
+  left: 0;
+}
 
+/* SIDEBAR BUTTONS - SQUARE with icons */
 #sidebar button {
   width: 50px;
   height: 50px;
@@ -126,6 +149,8 @@ button#shareBtn:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 #sidebar button:hover {
@@ -139,4 +164,29 @@ button#shareBtn:hover {
   color: #4b0082;
 }
 
-body.dark #status { color: #c0a3ff; }
+body.dark #status {
+  color: #c0a3ff;
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width: 400px) {
+  .content input {
+    width: 95%;
+  }
+
+  button#shareBtn {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+
+  #sidebar {
+    width: 70%;
+  }
+
+  #sidebar button {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
+}
