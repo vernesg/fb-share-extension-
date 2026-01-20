@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "FB Share Extension",
-  "version": "1.2",
-  "description": "Facebook Share Tool Extension with Monochrome Purple Design",
+  "version": "1.3",
+  "description": "Facebook Share Tool Extension with Tutorials and Features",
   "permissions": [
     "cookies",
     "storage",
