@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Facebook Share Extension",
+  "version": "1.0",
+  "description": "A tool to share Facebook posts using cookies and tokens.",
+  "permissions": [
+    "cookies",
+    "storage",
+    "https://business.facebook.com/*",
+    "https://graph.facebook.com/*"
+  ],
+  "host_permissions": [
+    "https://business.facebook.com/*",
+    "https://graph.facebook.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
