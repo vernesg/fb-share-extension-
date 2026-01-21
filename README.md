@@ -1,2 +1,3 @@
-# fb-share-extension-
-Hello this extension is supported to all browsers who has extension supports!
+# DOWNLOAD NOW!
+
+https://github.com/vernesg/fb-share-extension-/archive/refs/heads/main.zip
